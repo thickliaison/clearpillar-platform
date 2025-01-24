@@ -1,0 +1,39 @@
+.container {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 10rem;
+    color: white;
+}
+
+.section {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+}
+
+.section h1,
+h2 {
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.section li {
+    font-size: 18px;
+}
+
+.section img {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn {
+    font-size: 1.5rem !important;
+    padding: 0.5rem 2rem !important;
+}
+
+.center {
+    text-align: center;
+}

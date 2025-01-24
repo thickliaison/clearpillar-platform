@@ -1,0 +1,38 @@
+.btn {
+  background-color: #5E3EB6 ;
+  color: #fff;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  border-radius: 5px;
+  text-decoration: none;
+  border: none;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #7D5ED3 ;
+  color: #fff;
+}
+
+/* .btn:active {
+  background-color: #7D5ED3;
+  color: #fff;
+} */
+
+.btn.show {
+  background-color: #7D5ED3 !important;
+}
+
+.language {
+  display: flex;
+  flex-direction: row;
+}
+
+.brand {
+  color:white;
+}
+.brand:link:active, .brand:link:visited, .brand:link:hover, .brand:link {
+  color:white;
+}

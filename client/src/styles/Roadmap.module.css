@@ -1,0 +1,85 @@
+.section {
+    padding: 80px;
+    background: linear-gradient(0deg, rgba(15, 6, 42, 1) 0%, rgba(94, 62, 182, 1) 25%, rgba(94, 62, 182, 1) 75%, rgba(15, 6, 42, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.header-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header-container h1 {
+    font-size: 3.75em;
+    margin: 0;
+}
+
+.header-container h3 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.container {
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+}
+.item {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.grade {
+    flex-basis: 20%;
+    text-align: right;
+    font-weight: bold;
+    padding-right: 5rem; 
+}
+
+.star {
+    color: #FFE144;
+    font-size: 3rem;
+    z-index: 1;
+    position: absolute; /* Position star relative to the `.item` */
+    left: 20%; /* Align with the vertical line */
+    transform: translateX(-50%); /* Center the star over the line */
+}
+
+.checklist {
+    flex-basis: 75%;
+    margin-left: 4rem;
+    padding: 10px;
+    background: linear-gradient(#49328c, #49328c) padding-box,
+        linear-gradient(90deg, rgba(255, 225, 68, 1) 0%, rgba(0, 0, 0, 0) 75%) border-box;
+    border-radius: 1.5em;
+    border: 4px solid transparent;
+}
+
+.checklist li {
+    margin-left: 3rem;
+    margin-right: 5rem;
+    font-size: 1rem;
+}
+
+.checklist p {
+    font-size: 1.2rem;
+    margin-bottom: 0px !important;
+    margin-top: 0.5rem;
+    font-style: bold !important;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    left: 20%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #FFE144;
+    z-index: 0;
+}

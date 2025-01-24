@@ -1,0 +1,76 @@
+.page {
+  background: linear-gradient(0deg, rgba(15, 6, 42, 1) 0%, rgba(94, 62, 182, 1) 30%, rgba(94, 62, 182, 1) 60%, rgba(15, 6, 42, 1) 100%);
+  color: white;
+}
+
+.wrapper {
+  padding: 50px;
+  text-align: center;
+}
+
+.wrapper h1 {
+  font-family: Arial, sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.wrapper p {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.tabs {
+  font-weight: bold;
+  color: black;
+}
+
+.card {
+  margin: 3px;
+}
+
+.card-header {
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header:hover {
+  background-color: #83a2c3;
+}
+
+.card-header i {
+  transition: transform 0.3s, color 0.3s;
+}
+
+.card-header:hover i {
+  transform: scale(1.1);
+  color: white;
+}
+
+.card-header.active {
+  background-color: #83a2c3;
+  color: #fff;
+}
+
+.card-header.active i {
+  color: #fff;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.card-body>* {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

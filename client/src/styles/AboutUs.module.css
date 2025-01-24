@@ -1,0 +1,188 @@
+.page {
+    background: linear-gradient(0deg, rgba(15, 6, 42, 1) 0%, rgba(94, 62, 182, 1) 25%, rgba(94, 62, 182, 1) 75%, rgba(15, 6, 42, 1) 100%);
+    color: white;
+}
+
+.hero {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    background-image: linear-gradient(0deg, rgba(15, 6, 42, 1) 0%, rgba(255, 255, 255, 0) 80%), url('images/gradstudent.jpeg');
+    z-index: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 6, 42, 0.25);
+    z-index: 2;
+}
+
+.container {
+    max-width: 1700px;
+    margin: 0 auto;
+    padding-top: 3rem;
+    padding-bottom: 10rem;
+}
+
+.header {
+    position: absolute;
+    margin-left: 1rem;
+    margin-top: -175px;
+    z-index: 3;
+    font-family: "Bebas Neue", sans-serif !important;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 100px !important;
+}
+
+.section {
+    padding: 50px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.section h2 {
+    font-size: 3.5rem;
+    text-align: center;
+    margin-bottom: 0 !important;
+}
+
+.section h3 {
+    font-size: 2.5rem;
+    margin-top: 1rem;
+}
+
+.section li {
+    padding: 10px;
+    line-height: 2rem;
+}
+
+.section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -1rem;
+}
+
+
+.star-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    margin-bottom: 1.2rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+.star-items i {
+    color: #FFE144;
+    padding-left: 8px;
+    padding-right: 10px;
+    font-size: 2rem;
+}
+
+.line-container {
+    width: 350px;
+}
+
+.line {
+    border: 1px solid #FFE144;
+    opacity: 1.0;
+}
+
+.line-margin {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.founder-section {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.founder img {
+    display: flex;
+    width: 400px;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+
+.approach-img img {
+    display: flex;
+    width: 400px;
+    height: 600px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    background: linear-gradient(#49328c, #49328c) padding-box,
+        linear-gradient(180deg, rgba(255, 225, 68, 1) 0%, rgba(255, 225, 68, 0.05) 75%) border-box;
+    border: 1rem solid transparent;
+}
+
+
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: center;
+    margin-top: 1rem;
+}
+
+.initatives-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.initatives-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.initatives-text p {
+    font-size: 1rem;
+    color: #444;
+    text-align: left;
+}
+
+.initatives-divider {
+    border: 0;
+    height: 2px;
+    width: 90%;
+    margin: 30px auto;
+    background-color: black;
+}
+
+.divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 2px;
+    background-color: #ccc; 
+  }
+
+  @media (max-width: 800px) {
+    .divider {
+      display: none;
+    }
+  }

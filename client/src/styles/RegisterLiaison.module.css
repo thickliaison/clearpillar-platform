@@ -1,0 +1,34 @@
+/* liaison, communicaton mode */
+.communication-option {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.communication-option input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  position: relative
+}
+
+.communication-option input[type="checkbox"]:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.communication-option input[type="checkbox"]:checked::after {
+  content: '\2713';
+  color: white;
+  font-size: 18px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

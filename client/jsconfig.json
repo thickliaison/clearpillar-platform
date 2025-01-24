@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "baseUrl": "src",
+      "paths": {
+        "components/*": ["components/*"],
+        "constants/*": ["constants/*"],
+        "contexts/*": ["contexts/*"],
+        "images/*": ["images/*"],
+        "locales/*": ["locales/*"],
+        "styles/*": ["styles/*"],
+        "utils/*": ["utils/*"],
+        "strategist/*": ["strategist/*"],
+        "student/*": ["student/*"],
+        "studentAdvisor/*": ["studentAdvisor/*"],
+        "admin/*": ["admin/*"]
+      }
+    },
+    "include": ["src"]
+}

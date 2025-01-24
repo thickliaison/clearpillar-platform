@@ -1,0 +1,54 @@
+.register-container {
+  max-width: 650px !important;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.register-container p {
+  font-size: 0.8rem;
+}
+
+.register-container .btn {
+  margin: 1px;
+}
+
+.register-title {
+  color: #0d6efd;
+  text-align: center;
+}
+
+.register-form-label {
+  font-weight: bold;
+}
+
+.register-form-control {
+  border-radius: 10px;
+  border: 1px solid #865AFF;
+}
+
+.register-form-control textarea {
+  resize: none;
+}
+
+/* Profile Section */
+.profile-picture-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-picture-placeholder {
+  color: #2c3e50;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}

@@ -1,0 +1,37 @@
+.box {
+    display: flex;
+    margin: 2%;
+}
+
+.col {
+    display: block;
+    width: 50%;
+    height: 100%;
+    margin-right: 2%;
+    margin-left: 1%;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+td.profile:hover {
+    background-color: lightgray;
+}
+
+.no_border {
+    border-color: transparent !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.red {
+    color: red !important;
+}

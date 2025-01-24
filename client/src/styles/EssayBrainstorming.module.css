@@ -1,0 +1,95 @@
+.section {
+    background: linear-gradient(0deg, rgba(15, 6, 42, 1) 0%, rgba(94, 62, 182, 1) 30%, rgba(94, 62, 182, 1) 60%, rgba(15, 6, 42, 1) 100%);
+    color: white;
+    padding: 3rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.container h1 {
+    font-size: 3rem;
+    margin-bottom: 0px;
+    line-height: 3.5rem;
+}
+
+.line-div {
+    padding-top: 1.5rem;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.line {
+    border: 1px solid #FFE144;
+    opacity: 1.0;
+}
+
+.header-encap {
+    display: flex;
+    flex-direction: row;
+
+    margin: 0 auto;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    margin: 0 auto;
+    vertical-align: center;
+    font-size: 2rem;
+    color: #FFE144;
+}
+
+.stars i {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+}
+
+.content {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.left-side,
+.right-side {
+    flex: 1;
+    background: linear-gradient(#49328c, #49328c) padding-box,
+        linear-gradient(90deg, rgba(255, 225, 68, 1) 0%, rgba(0, 0, 0, 0) 75%) border-box;
+    border-radius: 1.5em;
+    border: 2px solid transparent;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.left-side h2,
+.right-side h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.left-side p,
+.right-side p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.btn {
+    border-radius: 10px;
+    padding: 12px 20px;
+}

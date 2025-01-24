@@ -1,0 +1,32 @@
+.hero {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.container {
+    max-width: 80%;
+    margin: auto;
+}
+
+.verticalcenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.clearpillar {
+    background-color: purple;
+}
+
+.jaxconnect {
+    background-color: blue;
+}
+
+.ahha {
+    background-color: red;
+}
+
+.lulumind {
+    background-color: orange;
+}

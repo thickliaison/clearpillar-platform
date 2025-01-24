@@ -1,0 +1,21 @@
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 4rem;
+    padding-bottom: 10rem;
+    color: white;
+}
+
+.letter {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.letter h2 {
+    margin-top: 3.5rem;
+    font-size: 2em;
+}
+
+.letter p {
+    font-size: 1.2em;
+}
