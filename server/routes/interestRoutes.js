@@ -1,9 +1,8 @@
+require('dotenv').config();
 const express = require('express');
+const multer = require('multer');
 const router = express.Router();
 const nodemailer = require('nodemailer');
-const jwt = require('jsonwebtoken');
-const multer = require('multer');
-require('dotenv').config();
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.mymangomail.com',
@@ -81,39 +80,12 @@ router.post('/interest-form', async (req, res) => {
   }
 });
 
-// generate tokenized link after home office confirmation
-router.post('/generate-registration-link', async (req, res) => {
-  console.log('Generating registration link');
-  const { email } = req.body;
-
-  // 24 hour expiration link
-  const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '24h' });
-  const registrationLink = `http://localhost:3000/register/student-register?token=${token}`;
-  console.log(registrationLink);
-
-  // send the link to the student
-  const mailOptionsRegister = {
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: 'Complete Your Registration',
-    text: `Thank you for confirming your interest! Complete your registration here: ${registrationLink}. This link will expire in 24 hours.`,
-  };
-
-  try {
-    await transporter.sendMail(mailOptionsRegister);
-    res.status(200).send({ message: 'Registration link sent to student successfully!' });
-  } catch (error) {
-    console.error('Error sending registration link email:', error);
-    res.status(500).send({ error: 'Failed to send registration link' });
-  }
-});
-
 const upload = multer();
 
 router.post('/application-form', upload.single('resume'), async (req, res) => {
   const { fullname, email, phonenumber, linkedin, position } = req.body;
-  console.log(req.body)
   const resume = req.file;
+  console.log(req.body)  
   console.log(resume)
 
   const mailOptionsOffice = {

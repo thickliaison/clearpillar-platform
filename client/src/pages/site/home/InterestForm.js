@@ -133,7 +133,7 @@ export default function InterestForm() {
       setOpen(true);
 
       try {
-        const response = await axios.post('http://localhost:3001/api/interest-form', formData);
+        const response = await axios.post('https://clearpillar.us/api/interest-form', formData);
         if (response.status === 200) {
           setOpen(false);
           enableButton();

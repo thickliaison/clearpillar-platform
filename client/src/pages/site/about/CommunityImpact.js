@@ -44,11 +44,6 @@ export default function CommunityImpact() {
                     <p>{t('connection-content1')}</p>
                     <p>{t('connection-content2')}</p>
                 </section>
-
-                {/* <section className={styles.section}>
-                    <h2>{t('faq')}</h2>
-                    <p>{t('determined')}</p>
-                </section> */}
             </div>
         </div>
     );

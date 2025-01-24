@@ -151,7 +151,6 @@ export default function ApplicationForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('pressed submit')
 
         setErrorMessageEmail('')
         setErrorMessagePhone('')
@@ -171,7 +170,7 @@ export default function ApplicationForm() {
             formDataObject.append('resume', file);
 
             try {
-                const response = await axios.post('http://localhost:3001/api/application-form', formDataObject, {
+                const response = await axios.post('https://clearpillar.us/api/application-form', formDataObject, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },

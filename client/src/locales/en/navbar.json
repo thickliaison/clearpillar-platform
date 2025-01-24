@@ -16,8 +16,5 @@
     "join-as-liaison": "Join Team as Liaison",
     "join-as-strategist": "Join Team as Strategist",
     "join-as-student-advisor": "Join Team as Student Advisor",
-    "login": "Login",
-    "dashboard": "Dashboard",
-    "settings": "Settings",
-    "logout": "Logout"
+    "get-started": "Get Started!"
 }

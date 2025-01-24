@@ -5,9 +5,6 @@ import { useTranslation } from 'react-i18next';
 const Workshops = () => {
   const { t } = useTranslation('workshop');
 
-// it might be better to use an API instead, which requires to be set up with Google Developer or something.
-// currently these are just the IDs of the shared folders which will have flyers uploaded
-
   const upcomingEventsID = "1BxDz8waP0mCFDhmJQfDK5UIVEnC6UPp7"
   const pastEventsID = "1hxZWJ89XAgnbR_pv9173XmVmawK4CF23"
 

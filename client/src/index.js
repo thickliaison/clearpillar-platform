@@ -5,7 +5,6 @@ import './i18n';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'react-datepicker/dist/react-datepicker.css';
 import 'styles/index.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -1,75 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import isTokenExpired from 'utils/validateToken';
-import axiosInstance from 'utils/axiosInstance';
 import styles from 'styles/Navbar.module.css'
 
 export default function Navbar() {
-  const { t, i18n } = useTranslation('navbar'); 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [profilePicture, setProfilePicture] = useState(null);
-  const userType = localStorage.getItem('userType');
-
-  const navigate = useNavigate();
+  const { t, i18n } = useTranslation('navbar');
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (!isTokenExpired(token)) {
-      const fetchProfilePicture = async () => {
-        try {
-          if (userType === 'Admin') {
-          } else if (userType === 'Strategist') {
-          }
-          else if (userType === 'Student') {
-          }
-          else if (userType === 'Liaison') {
-            const response = await axiosInstance.get('/liaison-profile-picture');
-            setProfilePicture(response.data.profilepicture);
-          }
-          else if (userType === 'Student Advisor') {
-
-          }
-          else {
-            console.error("unknown usertype")
-          }
-        } catch (error) {
-          console.error('Error fetching profile:', error);
-        }
-      };
-
-      fetchProfilePicture();
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, [navigate, userType])
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
-  };
-
-  const dashboardRoutes = {
-    Admin: '/admin/dashboard',
-    Liaison: '/liaison/dashboard',
-    Strategist: '/strategist/dashboard',
-    Student: '/student/dashboard',
-    StudentAdvisor: '/student-advisor/dashboard',
-  }
-
-  const settingsRoutes = {
-    Admin: '/admin/settings',
-    Liaison: '/liaison/settings',
-    Strategist: '/strategist/settings',
-    Student: '/student/settings',
-    StudentAdvisor: '/student-advisor/settings',
-  }
 
   return (
     <div className='bar'>
@@ -155,26 +93,9 @@ export default function Navbar() {
                 </ul>
               </li>
 
-              {/* Login */}
-              {/* UPDATE TO REFLECT BUSINESS FLOW OF ONLY LOG IN */}
-              {/* <LoginRouting /> */}
-              {isLoggedIn ? (
-                <li className="nav-item dropdown">
-                  <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src={profilePicture} style={{ height: "35px", width: "35px" }} className="rounded-circle" alt="..." />
-                  </Link>
-                  <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><Link className="dropdown-item" to={dashboardRoutes[userType]}>{t('dashboard')}</Link></li>
-                    <li><Link className="dropdown-item" to={settingsRoutes[userType]}>{t('settings')}</Link></li>
-                    <hr className="nav-line"></hr>
-                    <li><Link className="dropdown-item" to="/" onClick={handleLogout}>{t('logout')}</Link></li>
-                  </ul>
-                </li>
-              ) : (
-                <Link to="/login" role="button" aria-expanded="false">
-                  <button className={`${styles.btn} login`} type="button">{t('login')}</button>
-                </Link>
-              )}
+              <Link to="/student-interest-form">
+                  <button className={`${styles.btn} login`} type="button">{t('get-started')}</button>
+              </Link>
 
             </ul>
           </div>
