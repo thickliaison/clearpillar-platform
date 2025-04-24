@@ -11,7 +11,6 @@ The code is currently separated into 2 folders: ``client`` and ``server``. All f
 - AWS bucket (AWS Lightsail storage)
 
 <br/>
-<br/>
 
 # Info
 This website was created using CRA (Create React App). It may need be build from CRV (Create React Vite), because Content Security Policy needs to be set; there cannot be any iframe of the website for security purposes.
@@ -68,10 +67,12 @@ The SSL certificate should be auto-renewed by default. If for whatever reason it
 *Note: Check that htdocs/.well-known/acme-challenge exists (use the cd command-- the directory may not show in the terminal.) The certificate needs to be installed here so that the application can use/reach this. Look at server/app.js*
 
 <br/>
+To test auto renew of SSL certificate: ``sudo certbot renew --dry-run``
+
+<br/>
 
 Apache can be restarted using: ``sudo /opt/bitnami/ctlscript.sh restart apache``
 
-<br/>
 <br/>
 
 # How to Deploy
