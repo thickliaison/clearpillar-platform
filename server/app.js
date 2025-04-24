@@ -16,6 +16,9 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
+// For certbot autorenewal of certificate
+app.use('/.well-known/acme-challenge', express.static(path.join(__dirname, '../../.well-known/acme-challenge')));
+
 app.use('/api', routes);
 
 app.use(express.static(path.join(__dirname, "../client/build")));
