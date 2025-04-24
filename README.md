@@ -63,7 +63,9 @@ The SSL certificate is issued using certbot. If you get a 526 error when trying 
 <br/>
 The SSL certificate should be auto-renewed by default. If for whatever reason it isn't, issue a new one: 
 
-``sudo certbot certonly --standalone -d clearpillar.us -d www.clearpillar.us``
+``sudo certbot certonly --webroot -w /opt/bitnami/apache/htdocs -d clearpillar.us -d www.clearpillar.us``
+
+*Note: Check that htdocs/.well-known/acme-challenge exists (use the cd command-- the directory may not show in the terminal.) The certificate needs to be installed here so that the application can use/reach this. Look at server/app.js*
 
 <br/>
 
@@ -75,7 +77,7 @@ Apache can be restarted using: ``sudo /opt/bitnami/ctlscript.sh restart apache``
 # How to Deploy
 To push the code to production, AWS Lightsail uses the domain as the server (it has been configured that way--http://localhost:3001 is proxied). This means that you **must replace** ALL http://localhost:3001 with https://clearpillar.us in the client-side files axios requests. Failure to do so will result in a 503 error.
 
-*Note: This method is consistently removing and pushing new code. There must be another way that is easier or less time-consuming. Maybe a script. Or using FileZilla. Something like that.*
+*Note: This method is consistently removing and pushing new code. There must be another way that is easier or less time-consuming. Maybe a script. Or using FileZilla. Something like that. Could probably try doing git fetch/pull.*
 
 *Also, it's important that any **current processes are killed** before trying to use ``sudo rm -rf`` or you face a headache trying to fix it.*
 
