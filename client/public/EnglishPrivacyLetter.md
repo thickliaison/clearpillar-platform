@@ -206,6 +206,22 @@ We may update this policy periodically. Major changes will be communicated:
 
 
 
+## Terms and Conditions for SMS Messaging
+
+By opting in to our SMS/text messaging service, you agree to receive messages from ClearPillar related to college admissions support, reminders, updates, promotions, and personalized content. Message frequency varies.
+
+- Message and data rates may apply.
+- You may opt out at any time by replying “STOP.”
+- For help, reply “HELP” or contact info@clearpillar.us.
+- Messages may include both promotional and transactional content.
+- We will not share your phone number with third parties.
+- Your consent to receive texts is not a condition of any purchase.
+- Texts are sent only during appropriate hours (8:00 AM–9:00 PM local time).
+
+For full compliance details, see our SMS Compliance section below and consult our Privacy Policy. Users are responsible for updating their contact preferences.
+
+
+
 ## Contact Information
 
 ClearPillar
