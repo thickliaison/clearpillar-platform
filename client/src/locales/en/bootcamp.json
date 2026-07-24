@@ -1,0 +1,17 @@
+{
+  "title": "Bootcamp",
+  "subtitle": "Join our four-part workshop series to help students and families prepare for college",
+  "part1": {
+    "title": "Choosing the Right Colleges: A Data-Driven Approach"
+  },
+  "part2": {
+    "title": "College Life: Living, Learning & Getting Involved"
+  },
+  "part3": {
+    "title": "Preparing for College Expenses & Financial Aid"
+  },
+  "part4": {
+    "title": "Building a Strong College Application"
+  },
+  "register-button": "Register Now"
+}

@@ -16,6 +16,9 @@ import Roadmap from '@student-resources/Roadmap';
 import Workshops from '@student-resources/Workshops';
 import BusinessModel from '@join-the-team/BusinessModel';
 import EssayBrainstorming from '@student-resources/EssayBrainstorming';
+import Bootcamp from '@student-resources/Bootcamp';
+import BootcampRegister from '@student-resources/BootcampRegister';
+import BootcampRegisterSuccess from '@student-resources/BootcampRegisterSuccess';
 import LoginPage from '@auth/LoginPage';
 import StrategistRegister from '@auth/StrategistRegister';
 import LiaisonRegister from '@auth/LiaisonRegister';
@@ -92,6 +95,9 @@ function App() {
             <Route path="/resources/roadmap" element={<Roadmap />} />
             <Route path="/resources/essay-brainstorming" element={<EssayBrainstorming />} />
             <Route path="/resources/workshops" element={<Workshops />} />
+            <Route path="/resources/bootcamp" element={<Bootcamp />} />
+            <Route path="/resources/bootcamp/register" element={<BootcampRegister />} />
+            <Route path="/resources/bootcamp/register/success" element={<BootcampRegisterSuccess />} />
             <Route path="/opportunities/business-model" element={<BusinessModel />} />
             <Route path="/opportunities/join-student-advisor" element={<JoinStudentAdvisor />} />
             <Route path="/opportunities/join-strategist" element={<JoinStrategist />} />
