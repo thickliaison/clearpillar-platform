@@ -76,6 +76,7 @@ export default function Navbar() {
                   <li><Link className="dropdown-item" to="/resources/roadmap">{t('roadmap')}</Link></li>
                   <li><Link className="dropdown-item" to="/resources/essay-brainstorming">{t('essay-brainstorm')}</Link></li>
                   <li><Link className="dropdown-item" to="/resources/workshops">{t('workshops')}</Link></li>
+                  <li><Link className="dropdown-item" to="/resources/bootcamp">{t('bootcamp')}</Link></li>
                 </ul>
               </li>
 
