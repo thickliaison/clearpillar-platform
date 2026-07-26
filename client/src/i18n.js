@@ -15,6 +15,8 @@ const resources = {
     roadmap: require('locales/en/roadmap.json'),
     essayBrainstorm: require('locales/en/essayBrainstorm.json'),
     workshop: require('locales/en/workshop.json'),
+    bootcamp: require('locales/en/bootcamp.json'),
+    bootcampRegister: require('locales/en/bootcampRegister.json'),
     business: require('locales/en/business.json'),
     joinLiaison: require('locales/en/joinLiaison.json'),
     joinStrategist: require('locales/en/joinStrategist.json'),
@@ -33,6 +35,8 @@ const resources = {
     roadmap: require('locales/zh/roadmap.json'),
     essayBrainstorm: require('locales/zh/essayBrainstorm.json'),
     workshop: require('locales/zh/workshop.json'),
+    bootcamp: require('locales/zh/bootcamp.json'),
+    bootcampRegister: require('locales/zh/bootcampRegister.json'),
     business: require('locales/zh/business.json'),
     joinLiaison: require('locales/zh/joinLiaison.json'),
     joinStrategist: require('locales/zh/joinStrategist.json'),
@@ -46,7 +50,7 @@ i18n
     resources,
     lng: "en",
     fallbackLng: 'en',
-    ns: ['home', 'navbar', 'footer', 'about', 'community', 'privacy', 'admission', 'essayAssistance', 'tuition', 'roadmap', 'essayBrainstorm', 'roadmap', 'workshop', 'business', 'joinLiaison', 'joinStrategist', 'joinAdvisor'], // list all namespaces (pages)
+    ns: ['home', 'navbar', 'footer', 'about', 'community', 'privacy', 'admission', 'essayAssistance', 'tuition', 'roadmap', 'essayBrainstorm', 'roadmap', 'workshop', 'bootcamp', 'bootcampRegister', 'business', 'joinLiaison', 'joinStrategist', 'joinAdvisor'], // list all namespaces (pages)
 
     interpolation: {
       escapeValue: false // react already safes from xss
