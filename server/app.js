@@ -6,7 +6,7 @@ const routes = require('./routes');
 const path = require("path");
 
 app.use(cors({
-    origin: 'https://clearpillar.us',
+    origin: ['https://clearpillar.us', 'https://www.clearpillar.us'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
