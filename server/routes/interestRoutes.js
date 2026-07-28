@@ -5,14 +5,13 @@ const router = express.Router();
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.mymangomail.com',
-  port: 587,
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   },
-  // debug: true, 
-  // logger: true 
+  // debug: true,
+  // logger: true
 });
 
 router.post('/interest-form', async (req, res) => {
