@@ -1,6 +1,12 @@
 {
   "title": "訓練營",
   "subtitle": "歡迎參加我們由四部分組成的系列工作坊，幫助學生及家庭為大學做好準備",
+  "community-support": {
+    "title": "社區支持",
+    "paragraph1": "2026年ClearPillar大學預備訓練營的舉辦，是透過CitizensNYC頒發的「2026鄰里商業補助金」資助而成。",
+    "paragraph2": "這筆資助讓ClearPillar得以為社區中的學生與家庭，提供便利且優質的大學規劃教育與資源。",
+    "paragraph3": "ClearPillar也正在尋求紐約市議員 Phil Wong（第30選區）及其辦公室的支持，協助擴大本計畫的知名度，並增加當地家庭獲取大學規劃資源的機會。"
+  },
   "part1": {
     "title": "選擇合適的大學：一種數據驅動的方法"
   },
