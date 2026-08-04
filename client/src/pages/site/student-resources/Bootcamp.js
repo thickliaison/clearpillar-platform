@@ -57,7 +57,7 @@ export default function Bootcamp() {
         <div className={styles.topCta}>
           <Link
             to="/resources/bootcamp/register"
-            className={`btn ${styles.btn}`}
+            className={styles.btn}
           >
             <i className="fa-solid fa-user-plus pe-2"></i>
             {t("register-button")}
@@ -311,7 +311,7 @@ export default function Bootcamp() {
         <div className={styles.cta}>
           <Link
             to="/resources/bootcamp/register"
-            className={`btn ${styles.btn}`}
+            className={styles.btn}
           >
             <i className="fa-solid fa-user-plus pe-2"></i>
             {t("register-button")}
