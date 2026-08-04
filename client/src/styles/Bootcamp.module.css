@@ -317,14 +317,17 @@
   display: inline-flex;
   align-items: center;
   border-radius: 12px;
-  padding: 18px 44px;
-  font-size: 1.25rem;
+  padding: 18px 46px;
+  font-size: 1.3rem;
   font-weight: bold;
-  background-color: #ffe144;
-  color: #0f062a;
-  border: none;
+  background:
+    linear-gradient(#49328c, #49328c) padding-box,
+    linear-gradient(90deg, rgba(255, 225, 68, 1) 0%, rgba(255, 225, 68, 0.3) 100%)
+      border-box;
+  color: #ffe144;
+  border: 2px solid transparent;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(15, 6, 42, 0.25);
+  box-shadow: 0 4px 14px rgba(15, 6, 42, 0.4);
   transition:
     transform 0.15s ease,
     box-shadow 0.15s ease,
@@ -332,10 +335,13 @@
 }
 
 .btn:hover {
-  background-color: #f5d633;
-  color: #0f062a;
+  background:
+    linear-gradient(#5a3ca3, #5a3ca3) padding-box,
+    linear-gradient(90deg, rgba(255, 225, 68, 1) 0%, rgba(255, 225, 68, 0.5) 100%)
+      border-box;
+  color: #fff27a;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(15, 6, 42, 0.3);
+  box-shadow: 0 6px 18px rgba(15, 6, 42, 0.5);
 }
 
 .topCta {
