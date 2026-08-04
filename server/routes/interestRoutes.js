@@ -202,7 +202,7 @@ router.post('/bootcamp-register', async (req, res) => {
 
   const mailOptionsParent = {
     from: process.env.EMAIL_USER,
-    to: parentEmail,
+    to: [parentEmail, studentEmail].filter(Boolean),
     subject: 'Bootcamp Registration Confirmation',
     html: `
     <html>

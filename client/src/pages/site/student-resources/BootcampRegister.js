@@ -6,6 +6,9 @@ import validator from "validator";
 import axios from "axios";
 import styles from "styles/BootcampRegister.module.css";
 
+// Raised from 3 to 5 per attendee feedback asking to see/select more topics.
+const MAX_TOPICS = 5;
+
 const GRADE_OPTIONS = [
   { value: "9th Grade", labelKey: "grade-9" },
   { value: "10th Grade", labelKey: "grade-10" },
@@ -111,7 +114,7 @@ export default function BootcampRegister() {
           topics: prev.topics.filter((item) => item !== topic),
         };
       }
-      if (prev.topics.length >= 3) {
+      if (prev.topics.length >= MAX_TOPICS) {
         return prev;
       }
       return { ...prev, topics: [...prev.topics, topic] };
@@ -139,7 +142,7 @@ export default function BootcampRegister() {
     if (formData.topics.length === 0) {
       nextErrors.topics = t("error-topics-min");
     }
-    if (formData.topics.length > 3) {
+    if (formData.topics.length > MAX_TOPICS) {
       nextErrors.topics = t("error-topics-max");
     }
     if (!formData.communicationConsent || !formData.registrationConfirmation) {
@@ -431,7 +434,7 @@ export default function BootcampRegister() {
                     onChange={() => handleTopicChange(value)}
                     disabled={
                       !formData.topics.includes(value) &&
-                      formData.topics.length >= 3
+                      formData.topics.length >= MAX_TOPICS
                     }
                   />
                   {t(labelKey)}
