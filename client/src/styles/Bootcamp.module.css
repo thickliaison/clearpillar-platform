@@ -214,6 +214,29 @@
   margin-top: 0.5rem;
 }
 
+.segmentBlock {
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.segmentBlock:first-child {
+  padding-top: 0;
+  margin-top: 0;
+  border-top: none;
+}
+
+.segmentHeading {
+  font-size: 1.15rem !important;
+  font-weight: bold;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  color: white !important;
+  margin: 0.5rem 0 0.5rem !important;
+  padding-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
 .partList {
   margin: 0;
   padding-left: 1.25rem;
