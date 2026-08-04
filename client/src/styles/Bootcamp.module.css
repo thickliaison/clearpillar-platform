@@ -102,6 +102,190 @@
   line-height: 1.4;
 }
 
+.partExpanded {
+  text-align: left;
+  background:
+    linear-gradient(#49328c, #49328c) padding-box,
+    linear-gradient(90deg, rgba(255, 225, 68, 1) 0%, rgba(0, 0, 0, 0) 75%)
+      border-box;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.partExpandedHeader {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 1.75rem 2rem;
+}
+
+.partExpandedHeader:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.partExpandedTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.partChevron {
+  transition: transform 0.2s ease;
+}
+
+.partExpandedOpen .partChevron {
+  transform: rotate(180deg);
+}
+
+.partExpandedBody {
+  padding: 0.5rem 2rem 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.partExpandedHeading {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.partExpandedHeading h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.4;
+}
+
+.partMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  gap: 0.25rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.partFormat {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #0f062a;
+  background-color: #ffe144;
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.partShortDescription {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin: 0.3rem 0 0;
+}
+
+.partParagraph {
+  font-size: 1rem;
+  line-height: 1.75;
+  opacity: 0.9;
+  margin: 0 0 1rem;
+  max-width: 65ch;
+}
+
+.partExpanded h4 {
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffe144;
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.partExpandedBody h4:first-child {
+  margin-top: 0.5rem;
+}
+
+.partList {
+  margin: 0;
+  padding-left: 1.25rem;
+  line-height: 1.75;
+  opacity: 0.9;
+}
+
+.partList li {
+  margin-bottom: 0.5rem;
+}
+
+.partList li::marker {
+  color: #ffe144;
+}
+
+.speakers {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+.speakerCard {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 3px solid #ffe144;
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.speakerCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.speakerPhotoPlaceholder {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.speakerCard h5 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+}
+
+.speakerRole {
+  margin: 0;
+  font-size: 0.5rem;
+  font-weight: bold;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.04em;
+  color: #ffe144;
+  opacity: 0.9;
+}
+
+.speakerBio {
+  font-size: 0.5rem;
+  line-height: 1.65;
+  opacity: 0.85;
+  margin: 0 0 0.6rem;
+}
+
+.speakerBio:last-child {
+  margin-bottom: 0;
+}
+
 .cta {
   margin-top: 1rem;
 }

@@ -8,10 +8,102 @@
     "paragraph3": "ClearPillar is also seeking the support of New York City Council Member Phil Wong of District 30 to help expand awareness of the program and increase access to college-planning resources for local families."
   },
   "part1": {
-    "title": "Choosing the Right Colleges: A Data-Driven Approach"
+    "title": "Choosing the Right Colleges: A Data-Driven Approach",
+    "date": "July 31, 2026",
+    "time": "1:00 PM",
+    "location": "Office",
+    "format": "In person, unless otherwise confirmed",
+    "shortDescription": "Discover how to build a meaningful college list through data, research, and personal fit.",
+    "fullDescription": [
+      "Building a college list should never be based on rankings alone.",
+      "In this session, students and parents will learn how to use publicly available university data to evaluate colleges more strategically.",
+      "Using the Common Data Set, or CDS, we will demonstrate how colleges report important admissions, enrollment, and financial information. Students will see how real data can be collected, compared, and interpreted to support more informed college planning decisions.",
+      "Rachel and Tyler will demonstrate how ClearPillar organizes data from multiple colleges and combines it with an individual student's academic profile, interests, goals, and priorities.",
+      "Students will also participate in a guided activity showing them how to locate Common Data Set information and use it to identify possible reach, target, and likely colleges."
+    ],
+    "dataTopicsTitle": "Data Topics to Demonstrate",
+    "dataTopics": [
+      "GPA ranges",
+      "Standardized test-score ranges",
+      "Acceptance rates",
+      "Class rank",
+      "Academic profile",
+      "Factors considered in admission",
+      "Demonstrated interest",
+      "Enrollment statistics",
+      "Financial aid information",
+      "Student retention and graduation information, where relevant"
+    ],
+    "studentsWillLearnTitle": "Students Will Learn",
+    "studentsWillLearn": [
+      "What the Common Data Set is.",
+      "Where to locate Common Data Set information.",
+      "How colleges report admissions information.",
+      "How to interpret admissions statistics.",
+      "How to compare colleges using consistent data.",
+      "How to distinguish reach, target, and likely colleges.",
+      "How to identify areas of a student profile that may need improvement.",
+      "How to combine quantitative data with personal fit.",
+      "How ClearPillar uses data to support college planning."
+    ],
+    "guidedActivityTitle": "Guided Data Activity",
+    "guidedActivity": "Students will use real college data during the session to practice locating, organizing, and interpreting Common Data Set information. Their work may also help ClearPillar test and improve its college research and planning model.",
+    "speakersTitle": "Speakers",
+    "speakers": [
+      {
+        "name": "Rachel Lam, CCFC®, CLTC®",
+        "role": "Founder, ClearPillar",
+        "bio": [
+          "Rachel Lam is the founder of ClearPillar, an educational advisory organization dedicated to helping immigrant and first-generation families navigate the American education system.",
+          "With more than twenty years of professional experience working with individuals and families, Rachel integrates college planning, financial planning, and long-term educational strategy into a comprehensive advising approach.",
+          "Her work emphasizes data-informed decision-making, personalized student development, and helping students identify colleges and opportunities that align with their academic strengths, personal interests, financial circumstances, and long-term goals."
+        ]
+      },
+      {
+        "name": "Tyler",
+        "role": "Summer Intern, ClearPillar",
+        "bio": [
+          "Tyler is a summer intern at ClearPillar who has worked with the advisory and research team to update and strengthen ClearPillar's college data model.",
+          "He helped organize and analyze information from approximately 150 colleges and universities and supported the team in applying that research to student college-planning cases.",
+          "Through this project, Tyler has contributed to ClearPillar's goal of helping students make more informed college decisions through research, data analysis, and personalized advising."
+        ]
+      }
+    ]
   },
   "part2": {
-    "title": "College Life: Living, Learning & Getting Involved"
+    "title": "College Life: Living, Learning & Getting Involved",
+    "date": "August 7, 2026",
+    "time": "1:00 PM",
+    "location": "Office",
+    "format": "In person",
+    "shortDescription": "Explore college life and learn how to take advantage of academic, social, leadership, and professional opportunities on campus.",
+    "fullDescription": [
+      "Choosing and entering a college is only the beginning.",
+      "Students must also learn how to adjust to a new academic environment, locate campus resources, build relationships, manage their time, and become involved in opportunities that support their personal and professional growth.",
+      "This session will help students understand what college life may look like beyond the classroom and how they can become active participants in their campus communities."
+    ],
+    "studentsWillLearnTitle": "Students Will Learn",
+    "studentsWillLearn": [
+      "How to transition from high school to college.",
+      "How college-level learning may differ from high school.",
+      "How to use academic advising and campus support services.",
+      "How to communicate with professors.",
+      "How to choose student organizations.",
+      "How to explore leadership opportunities.",
+      "How to find internships and research experiences.",
+      "How to build professional and peer networks.",
+      "How to manage time and competing responsibilities.",
+      "How to ask for help when facing academic or personal challenges.",
+      "How to balance academics, activities, friendships, and well-being."
+    ],
+    "speakersTitle": "Speakers",
+    "speakers": [
+      {
+        "name": "Anthony Moran",
+        "role": "Biography pending confirmation",
+        "bio": []
+      }
+    ]
   },
   "part3": {
     "title": "Preparing for College Expenses & Financial Aid"
