@@ -54,6 +54,16 @@ export default function Bootcamp() {
           <p>{t("community-support.paragraph3")}</p>
         </div>
 
+        <div className={styles.topCta}>
+          <Link
+            to="/resources/bootcamp/register"
+            className={`btn ${styles.btn}`}
+          >
+            <i className="fa-solid fa-user-plus pe-2"></i>
+            {t("register-button")}
+          </Link>
+        </div>
+
         <div className={styles.parts}>
           {parts.map((part, index) => {
             const isSheetBacked = part in SHEET_BACKED_PARTS;
@@ -165,10 +175,7 @@ export default function Bootcamp() {
                                       </div>
                                     </div>
                                     {speaker.bio.map((paragraph, j) => (
-                                      <p
-                                        key={j}
-                                        className={styles.speakerBio}
-                                      >
+                                      <p key={j} className={styles.speakerBio}>
                                         {paragraph}
                                       </p>
                                     ))}
