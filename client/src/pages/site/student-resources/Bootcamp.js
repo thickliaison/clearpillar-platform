@@ -1,22 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "styles/Bootcamp.module.css";
+import { fetchBootcampSessionSegments } from "utils/bootcampSheetData";
 
 // Sessions with full content filled in from the program brief. Sessions not
 // listed here still only have a title and render as the simple summary row,
 // until their dates/descriptions/speakers are confirmed.
 const EXPANDABLE_PARTS = ["part1", "part2"];
 
+// Sessions whose content Rachel edits directly in the Bootcamp Sessions /
+// Bootcamp Speakers Google Sheets instead of in code. Maps the part key to
+// the sessionNumber used in those sheets.
+const SHEET_BACKED_PARTS = { part3: 3 };
+
 export default function Bootcamp() {
   const { t, i18n } = useTranslation("bootcamp");
   const [expandedPart, setExpandedPart] = useState(null);
+  const [sheetSegments, setSheetSegments] = useState({});
 
   const parts = ["part1", "part2", "part3", "part4"];
 
   const toggleExpanded = (part) => {
     setExpandedPart((prev) => (prev === part ? null : part));
   };
+
+  useEffect(() => {
+    Object.entries(SHEET_BACKED_PARTS).forEach(([part, sessionNumber]) => {
+      fetchBootcampSessionSegments(sessionNumber)
+        .then((segments) => {
+          setSheetSegments((prev) => ({ ...prev, [part]: segments }));
+        })
+        .catch((error) => {
+          console.error(`Failed to load ${part} from sheet:`, error);
+          setSheetSegments((prev) => ({ ...prev, [part]: null }));
+        });
+    });
+  }, []);
 
   return (
     <section className={styles.section}>
@@ -36,8 +56,134 @@ export default function Bootcamp() {
 
         <div className={styles.parts}>
           {parts.map((part, index) => {
+            const isSheetBacked = part in SHEET_BACKED_PARTS;
             const isExpandable = EXPANDABLE_PARTS.includes(part);
             const isOpen = expandedPart === part;
+
+            if (isSheetBacked) {
+              const segments = sheetSegments[part];
+
+              if (!segments) {
+                return (
+                  <div key={part} className={styles.part}>
+                    <span className={styles.partNumber}>{index + 1}</span>
+                    <h3>{t(`${part}.title`)}</h3>
+                  </div>
+                );
+              }
+
+              const first = segments[0];
+              const last = segments[segments.length - 1];
+              const overallTitle = segments.map((s) => s.title).join(" / ");
+              const overallShortDescription = segments
+                .map((s) => s.shortDescription)
+                .filter(Boolean)
+                .join(" / ");
+
+              return (
+                <div
+                  key={part}
+                  className={`${styles.partExpanded} ${isOpen ? styles.partExpandedOpen : ""}`}
+                >
+                  <button
+                    type="button"
+                    className={styles.partExpandedHeader}
+                    onClick={() => toggleExpanded(part)}
+                    aria-expanded={isOpen}
+                  >
+                    <div className={styles.partExpandedTopRow}>
+                      <div className={styles.partExpandedHeading}>
+                        <span className={styles.partNumber}>{index + 1}</span>
+                        <div>
+                          <h3>{overallTitle}</h3>
+                          <p className={styles.partShortDescription}>
+                            {overallShortDescription}
+                          </p>
+                        </div>
+                      </div>
+                      <div className={styles.partMeta}>
+                        <span>{first.date}</span>
+                        <span>
+                          {first.startTime} – {last.endTime}
+                        </span>
+                        <span>{first.location}</span>
+                        <i
+                          className={`fa-solid fa-chevron-down ${styles.partChevron}`}
+                        ></i>
+                      </div>
+                    </div>
+                  </button>
+
+                  {isOpen && (
+                    <div className={styles.partExpandedBody}>
+                      {segments.map((segment, si) => (
+                        <div key={si} className={styles.segmentBlock}>
+                          <h4 className={styles.segmentHeading}>
+                            {segment.segment
+                              ? `${segment.segment}: ${segment.title}`
+                              : segment.title}
+                          </h4>
+                          <p className={styles.partFormat}>
+                            {segment.startTime} – {segment.endTime}
+                            {segment.language ? ` · ${segment.language}` : ""}
+                          </p>
+
+                          {segment.fullDescription.map((paragraph, i) => (
+                            <p key={i} className={styles.partParagraph}>
+                              {paragraph}
+                            </p>
+                          ))}
+
+                          {segment.studentsWillLearn.length > 0 && (
+                            <>
+                              <h4>{t("studentsWillLearnTitle")}</h4>
+                              <ul className={styles.partList}>
+                                {segment.studentsWillLearn.map((item, i) => (
+                                  <li key={i}>{item}</li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
+
+                          {segment.speakers.length > 0 && (
+                            <>
+                              <h4>{t("speakersTitle")}</h4>
+                              <div className={styles.speakers}>
+                                {segment.speakers.map((speaker, i) => (
+                                  <div key={i} className={styles.speakerCard}>
+                                    <div className={styles.speakerCardHeader}>
+                                      <div
+                                        className={
+                                          styles.speakerPhotoPlaceholder
+                                        }
+                                      />
+                                      <div>
+                                        <h5>{speaker.name}</h5>
+                                        <p className={styles.speakerRole}>
+                                          {speaker.role}
+                                        </p>
+                                      </div>
+                                    </div>
+                                    {speaker.bio.map((paragraph, j) => (
+                                      <p
+                                        key={j}
+                                        className={styles.speakerBio}
+                                      >
+                                        {paragraph}
+                                      </p>
+                                    ))}
+                                  </div>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
 
             if (!isExpandable) {
               return (
