@@ -1,14 +1,23 @@
 import Papa from "papaparse";
 
-// Published CSV export URLs for the two Bootcamp content sheets Rachel edits
-// directly. Requires both sheets to have link-sharing set to "Anyone with
-// the link - Viewer" for the export endpoint to be reachable without auth.
-// No gid param: these sheets only have one tab each, and the tab's actual
-// internal gid isn't 0 for a CSV-converted sheet - passing gid=0 404s.
-const SESSIONS_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/1QQrQcsj5T6lw_b7AzH6dmc_Lj22udOdMga3sgL84FMc/export?format=csv";
-const SPEAKERS_CSV_URL =
-  "https://docs.google.com/spreadsheets/d/1BViO4Y5umOn3YDvPvRe-bEpyIVGWlbtvcEywIfdM6Ms/export?format=csv";
+// All Bootcamp content Rachel edits directly lives in one spreadsheet with
+// three tabs (Sessions, Speakers, Page Settings). Each tab needs its own
+// gid in the CSV export URL - gid=0 does not reliably match any particular
+// tab, so each one was looked up directly from the tab's URL in Sheets.
+// Requires the spreadsheet to have link-sharing set to "Anyone with the
+// link - Viewer" for the export endpoint to be reachable without auth.
+const BOOTCAMP_SHEET_ID = "1paAjK8K1fKiHubyDEBVWaj27pMAVjfGqsHsmQ_KtM_M";
+const SESSIONS_GID = "472647504";
+const SPEAKERS_GID = "1025340818";
+const PAGE_SETTINGS_GID = "1881480750";
+
+function sheetCsvUrl(gid) {
+  return `https://docs.google.com/spreadsheets/d/${BOOTCAMP_SHEET_ID}/export?format=csv&gid=${gid}`;
+}
+
+const SESSIONS_CSV_URL = sheetCsvUrl(SESSIONS_GID);
+const SPEAKERS_CSV_URL = sheetCsvUrl(SPEAKERS_GID);
+const PAGE_SETTINGS_CSV_URL = sheetCsvUrl(PAGE_SETTINGS_GID);
 
 // List-style cells (fullDescription, studentsWillLearn, bio) use one entry
 // per line within the cell (Alt+Enter in Sheets to add a line).
@@ -73,8 +82,27 @@ export async function fetchBootcampSessionSegments(sessionNumber) {
       language: row.language || "",
       shortDescription: row.shortDescription || "",
       fullDescription: splitLines(row.fullDescription),
+      dataTopics: splitLines(row.dataTopics),
       studentsWillLearn: splitLines(row.studentsWillLearn),
+      guidedActivity: row.guidedActivity || "",
       speakers: segmentSpeakers,
     };
   });
+}
+
+// Fetches the page-level title/subtitle from the Page Settings tab. Returns
+// null if the sheet has no title filled in, so the caller can fall back to
+// the i18n default.
+export async function fetchBootcampPageSettings() {
+  const rows = await fetchCsv(PAGE_SETTINGS_CSV_URL);
+  const row = rows[0];
+
+  if (!row || !(row.title || "").trim()) {
+    return null;
+  }
+
+  return {
+    title: row.title || "",
+    subtitle: row.subtitle || "",
+  };
 }
