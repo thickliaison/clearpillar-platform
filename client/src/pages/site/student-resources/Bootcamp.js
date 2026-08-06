@@ -2,22 +2,23 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "styles/Bootcamp.module.css";
-import { fetchBootcampSessionSegments } from "utils/bootcampSheetData";
+import {
+  fetchBootcampSessionSegments,
+  fetchBootcampPageSettings,
+} from "utils/bootcampSheetData";
 
-// Sessions with full content filled in from the program brief. Sessions not
-// listed here still only have a title and render as the simple summary row,
-// until their dates/descriptions/speakers are confirmed.
-const EXPANDABLE_PARTS = ["part1", "part2"];
-
-// Sessions whose content Rachel edits directly in the Bootcamp Sessions /
-// Bootcamp Speakers Google Sheets instead of in code. Maps the part key to
-// the sessionNumber used in those sheets.
-const SHEET_BACKED_PARTS = { part3: 3 };
+// Sessions whose content Rachel edits directly in the Bootcamp Data Google
+// Sheet (Sessions/Speakers tabs) instead of in code. Maps the part key to
+// the sessionNumber used in those tabs. Sessions not listed here still only
+// have a title and render as the simple summary row, until their content is
+// added to the sheet.
+const SHEET_BACKED_PARTS = { part1: 1, part2: 2, part3: 3, part4: 4 };
 
 export default function Bootcamp() {
-  const { t, i18n } = useTranslation("bootcamp");
+  const { t } = useTranslation("bootcamp");
   const [expandedPart, setExpandedPart] = useState(null);
   const [sheetSegments, setSheetSegments] = useState({});
+  const [pageSettings, setPageSettings] = useState(null);
 
   const parts = ["part1", "part2", "part3", "part4"];
 
@@ -36,14 +37,23 @@ export default function Bootcamp() {
           setSheetSegments((prev) => ({ ...prev, [part]: null }));
         });
     });
+
+    fetchBootcampPageSettings()
+      .then((settings) => setPageSettings(settings))
+      .catch((error) => {
+        console.error("Failed to load page settings from sheet:", error);
+        setPageSettings(null);
+      });
   }, []);
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h1>{t("title")}</h1>
-          <p className={styles.subtitle}>{t("subtitle")}</p>
+          <h1>{pageSettings?.title || t("title")}</h1>
+          <p className={styles.subtitle}>
+            {pageSettings?.subtitle || t("subtitle")}
+          </p>
         </div>
 
         <div className={styles.communitySupport}>
@@ -67,7 +77,6 @@ export default function Bootcamp() {
         <div className={styles.parts}>
           {parts.map((part, index) => {
             const isSheetBacked = part in SHEET_BACKED_PARTS;
-            const isExpandable = EXPANDABLE_PARTS.includes(part);
             const isOpen = expandedPart === part;
 
             if (isSheetBacked) {
@@ -114,7 +123,8 @@ export default function Bootcamp() {
                       <div className={styles.partMeta}>
                         <span>{first.date}</span>
                         <span>
-                          {first.startTime} – {last.endTime}
+                          {first.startTime}
+                          {last.endTime ? ` – ${last.endTime}` : ""}
                         </span>
                         <span>{first.location}</span>
                         <i
@@ -134,7 +144,8 @@ export default function Bootcamp() {
                               : segment.title}
                           </h4>
                           <p className={styles.partFormat}>
-                            {segment.startTime} – {segment.endTime}
+                            {segment.startTime}
+                            {segment.endTime ? ` – ${segment.endTime}` : ""}
                             {segment.language ? ` · ${segment.language}` : ""}
                           </p>
 
@@ -144,6 +155,17 @@ export default function Bootcamp() {
                             </p>
                           ))}
 
+                          {segment.dataTopics.length > 0 && (
+                            <>
+                              <h4>{t("dataTopicsTitle")}</h4>
+                              <ul className={styles.partList}>
+                                {segment.dataTopics.map((topic, i) => (
+                                  <li key={i}>{topic}</li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
+
                           {segment.studentsWillLearn.length > 0 && (
                             <>
                               <h4>{t("studentsWillLearnTitle")}</h4>
@@ -152,6 +174,15 @@ export default function Bootcamp() {
                                   <li key={i}>{item}</li>
                                 ))}
                               </ul>
+                            </>
+                          )}
+
+                          {segment.guidedActivity && (
+                            <>
+                              <h4>{t("guidedActivityTitle")}</h4>
+                              <p className={styles.partParagraph}>
+                                {segment.guidedActivity}
+                              </p>
                             </>
                           )}
 
@@ -192,117 +223,10 @@ export default function Bootcamp() {
               );
             }
 
-            if (!isExpandable) {
-              return (
-                <div key={part} className={styles.part}>
-                  <span className={styles.partNumber}>{index + 1}</span>
-                  <h3>{t(`${part}.title`)}</h3>
-                </div>
-              );
-            }
-
             return (
-              <div
-                key={part}
-                className={`${styles.partExpanded} ${isOpen ? styles.partExpandedOpen : ""}`}
-              >
-                <button
-                  type="button"
-                  className={styles.partExpandedHeader}
-                  onClick={() => toggleExpanded(part)}
-                  aria-expanded={isOpen}
-                >
-                  <div className={styles.partExpandedTopRow}>
-                    <div className={styles.partExpandedHeading}>
-                      <span className={styles.partNumber}>{index + 1}</span>
-                      <div>
-                        <h3>{t(`${part}.title`)}</h3>
-                        <p className={styles.partShortDescription}>
-                          {t(`${part}.shortDescription`)}
-                        </p>
-                      </div>
-                    </div>
-                    <div className={styles.partMeta}>
-                      <span>{t(`${part}.date`)}</span>
-                      <span>{t(`${part}.time`)}</span>
-                      <span>{t(`${part}.location`)}</span>
-                      <i
-                        className={`fa-solid fa-chevron-down ${styles.partChevron}`}
-                      ></i>
-                    </div>
-                  </div>
-                </button>
-
-                {isOpen && (
-                  <div className={styles.partExpandedBody}>
-                    <p className={styles.partFormat}>{t(`${part}.format`)}</p>
-
-                    {t(`${part}.fullDescription`, {
-                      returnObjects: true,
-                    }).map((paragraph, i) => (
-                      <p key={i} className={styles.partParagraph}>
-                        {paragraph}
-                      </p>
-                    ))}
-
-                    {i18n.exists(`${part}.dataTopics`, { ns: "bootcamp" }) && (
-                      <>
-                        <h4>{t(`${part}.dataTopicsTitle`)}</h4>
-                        <ul className={styles.partList}>
-                          {t(`${part}.dataTopics`, {
-                            returnObjects: true,
-                          }).map((topic, i) => (
-                            <li key={i}>{topic}</li>
-                          ))}
-                        </ul>
-                      </>
-                    )}
-
-                    <h4>{t(`${part}.studentsWillLearnTitle`)}</h4>
-                    <ul className={styles.partList}>
-                      {t(`${part}.studentsWillLearn`, {
-                        returnObjects: true,
-                      }).map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-
-                    {i18n.exists(`${part}.guidedActivity`, {
-                      ns: "bootcamp",
-                    }) && (
-                      <>
-                        <h4>{t(`${part}.guidedActivityTitle`)}</h4>
-                        <p className={styles.partParagraph}>
-                          {t(`${part}.guidedActivity`)}
-                        </p>
-                      </>
-                    )}
-
-                    <h4>{t(`${part}.speakersTitle`)}</h4>
-                    <div className={styles.speakers}>
-                      {t(`${part}.speakers`, { returnObjects: true }).map(
-                        (speaker, i) => (
-                          <div key={i} className={styles.speakerCard}>
-                            <div className={styles.speakerCardHeader}>
-                              <div className={styles.speakerPhotoPlaceholder} />
-                              <div>
-                                <h5>{speaker.name}</h5>
-                                <p className={styles.speakerRole}>
-                                  {speaker.role}
-                                </p>
-                              </div>
-                            </div>
-                            {speaker.bio.map((paragraph, j) => (
-                              <p key={j} className={styles.speakerBio}>
-                                {paragraph}
-                              </p>
-                            ))}
-                          </div>
-                        ),
-                      )}
-                    </div>
-                  </div>
-                )}
+              <div key={part} className={styles.part}>
+                <span className={styles.partNumber}>{index + 1}</span>
+                <h3>{t(`${part}.title`)}</h3>
               </div>
             );
           })}
