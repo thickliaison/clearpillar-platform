@@ -1,6 +1,7 @@
 {
   "title": "Bootcamp",
-  "subtitle": "Join our four-part workshop series to help students and families prepare for college",
+  "subtitle": "Join our College Readiness Workshops — each session covers a different college planning topic and can be attended independently.",
+  "attend-any-note": "Attend any session that interests you — no previous sessions required.",
   "dataTopicsTitle": "Data Topics to Demonstrate",
   "studentsWillLearnTitle": "Students Will Learn",
   "guidedActivityTitle": "Guided Data Activity",
@@ -8,8 +9,7 @@
   "community-support": {
     "title": "Community Support",
     "paragraph1": "The 2026 ClearPillar College Readiness Bootcamp is made possible through funding from the 2026 Neighborhood Business Grant, awarded by CitizensNYC.",
-    "paragraph2": "This funding allows ClearPillar to provide accessible, high-quality college planning education and resources to students and families in our community.",
-    "paragraph3": "ClearPillar is also seeking the support of New York City Council Member Phil Wong of District 30 to help expand awareness of the program and increase access to college-planning resources for local families."
+    "paragraph2": "This funding allows ClearPillar to provide accessible, high-quality college planning education and resources to students and families in our community."
   },
   "part1": {
     "title": "Choosing the Right Colleges: A Data-Driven Approach",

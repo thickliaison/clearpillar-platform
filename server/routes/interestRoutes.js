@@ -210,6 +210,11 @@ router.post('/bootcamp-register', async (req, res) => {
         <h3>Hi ${parentName},</h3>
         <p>Thank you for registering ${firstName} ${lastName} for the ClearPillar Bootcamp!</p>
         <p>We have received your registration and will follow up with additional program information and a short participant questionnaire.</p>
+        <p><strong>To Attend In Person:</strong><br />
+        90-02 Queens Blvd, Suite 2D<br />
+        Elmhurst, NY 11373</p>
+        <p>Students and families who attend in person will receive a complimentary gift with a retail value of $33, sponsored by <a href="https://www.arborelife.com">Arboré</a>.</p>
+        <p><strong>Note:</strong> Sessions are not recorded, so please plan to attend live.</p>
         <p>If you have any questions, feel free to reply to this email.</p>
         <p>Best regards,</p>
         <p>ClearPillar Team</p>

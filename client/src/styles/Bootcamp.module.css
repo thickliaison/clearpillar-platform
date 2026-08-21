@@ -55,12 +55,6 @@
   margin-bottom: 0;
 }
 
-.communitySupportDivider {
-  border: none;
-  border-top: 2px solid rgba(255, 255, 255, 0.5);
-  margin: 1.25rem 0;
-}
-
 .parts {
   display: flex;
   flex-direction: column;
@@ -307,6 +301,13 @@
 
 .speakerBio:last-child {
   margin-bottom: 0;
+}
+
+.attendAnyNote {
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0.85;
+  margin: 0;
 }
 
 .cta {
