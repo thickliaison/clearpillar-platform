@@ -1,6 +1,7 @@
 {
   "title": "訓練營",
-  "subtitle": "歡迎參加我們由四部分組成的系列工作坊，幫助學生及家庭為大學做好準備",
+  "subtitle": "歡迎參加我們的大學預備工作坊——每場課程涵蓋不同的大學規劃主題，可獨立參加。",
+  "attend-any-note": "歡迎參加任何您感興趣的場次——無需先參加之前的場次。",
   "dataTopicsTitle": "將展示的數據主題",
   "studentsWillLearnTitle": "學生將學到",
   "guidedActivityTitle": "引導式數據活動",
@@ -8,8 +9,7 @@
   "community-support": {
     "title": "社區支持",
     "paragraph1": "2026年ClearPillar大學預備訓練營的舉辦，是透過CitizensNYC頒發的「2026鄰里商業補助金」資助而成。",
-    "paragraph2": "這筆資助讓ClearPillar得以為社區中的學生與家庭，提供便利且優質的大學規劃教育與資源。",
-    "paragraph3": "ClearPillar也正在尋求紐約市議員 Phil Wong（第30選區）及其辦公室的支持，協助擴大本計畫的知名度，並增加當地家庭獲取大學規劃資源的機會。"
+    "paragraph2": "這筆資助讓ClearPillar得以為社區中的學生與家庭，提供便利且優質的大學規劃教育與資源。"
   },
   "part1": {
     "title": "選擇合適的大學：一種數據驅動的方法",

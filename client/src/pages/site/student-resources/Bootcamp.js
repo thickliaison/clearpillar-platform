@@ -60,8 +60,6 @@ export default function Bootcamp() {
           <h2>{t("community-support.title")}</h2>
           <p>{t("community-support.paragraph1")}</p>
           <p>{t("community-support.paragraph2")}</p>
-          <hr className={styles.communitySupportDivider} />
-          <p>{t("community-support.paragraph3")}</p>
         </div>
 
         <div className={styles.topCta}>
@@ -231,6 +229,8 @@ export default function Bootcamp() {
             );
           })}
         </div>
+
+        <p className={styles.attendAnyNote}>{t("attend-any-note")}</p>
 
         <div className={styles.cta}>
           <Link
