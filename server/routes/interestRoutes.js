@@ -213,6 +213,10 @@ router.post('/bootcamp-register', async (req, res) => {
         <p><strong>To Attend In Person:</strong><br />
         90-02 Queens Blvd, Suite 2D<br />
         Elmhurst, NY 11373</p>
+        <p><strong>To Attend Remotely:</strong><br />
+        Zoom Meeting ID: 826 3526 0340<br />
+        Passcode: 2026CP<br />
+        <a href="https://us06web.zoom.us/meeting/register/deAswTdcR52TZxvQDO5F3g">Register for the Zoom link</a></p>
         <p>Students and families who attend in person will receive a complimentary gift with a retail value of $33, sponsored by <a href="https://www.arborelife.com">Arboré</a>.</p>
         <p><strong>Note:</strong> Sessions are not recorded, so please plan to attend live.</p>
         <p>If you have any questions, feel free to reply to this email.</p>
