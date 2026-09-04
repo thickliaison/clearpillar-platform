@@ -158,6 +158,7 @@ router.post('/bootcamp-register', async (req, res) => {
     parentEmail,
     parentPhone,
     preferredLanguage,
+    attendanceFormat,
     topics,
     hearAbout,
     hearAboutOther,
@@ -188,6 +189,7 @@ router.post('/bootcamp-register', async (req, res) => {
       Parent/Guardian Phone: ${parentPhone}
 
       Preferred Language: ${preferredLanguage}
+      Attendance Format: ${attendanceFormat}
 
       Topics of Interest:
       ${topics.join(', ')}
@@ -220,6 +222,7 @@ router.post('/bootcamp-register', async (req, res) => {
         <p>Students and families who attend in person will receive a complimentary gift with a retail value of $33, sponsored by <a href="https://www.arborelife.com">Arboré</a>.</p>
         <p><strong>Note:</strong> Sessions are not recorded, so please plan to attend live.</p>
         <p>If you have any questions, feel free to reply to this email.</p>
+        <p>Questions? Let us know at <a href="mailto:support@clearpillar.us">support@clearpillar.us</a> or at 347-400-4166.</p>
         <p>Best regards,</p>
         <p>ClearPillar Team</p>
         <p><img src="https://clearpillar.us/favicon.png" alt="Brand Logo" style="width: 50px; height: 50px;" /></p>

@@ -23,6 +23,11 @@ const LANGUAGE_OPTIONS = [
   { value: "Both", labelKey: "language-both" },
 ];
 
+const ATTENDANCE_FORMAT_OPTIONS = [
+  { value: "In Person", labelKey: "attendance-in-person" },
+  { value: "Remote", labelKey: "attendance-remote" },
+];
+
 const TOPIC_OPTIONS = [
   { value: "College Planning Roadmap", labelKey: "topic-roadmap" },
   { value: "Building a College List", labelKey: "topic-college-list" },
@@ -63,6 +68,7 @@ const initialFormData = {
   parentEmail: "",
   parentPhone: "",
   preferredLanguage: "",
+  attendanceFormat: "",
   topics: [],
   hearAbout: "",
   hearAboutOther: "",
@@ -411,6 +417,30 @@ export default function BootcampRegister() {
                     checked={formData.preferredLanguage === value}
                     onChange={(e) =>
                       setField("preferredLanguage", e.target.value)
+                    }
+                    required
+                  />
+                  {t(labelKey)}
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="form-group mb-3">
+            <label>
+              {t("attendance-format")}
+              {requiredMark}
+            </label>
+            <div className={styles.radioGroup}>
+              {ATTENDANCE_FORMAT_OPTIONS.map(({ value, labelKey }) => (
+                <label key={value} className={styles.radioLabel}>
+                  <input
+                    type="radio"
+                    name="attendanceFormat"
+                    value={value}
+                    checked={formData.attendanceFormat === value}
+                    onChange={(e) =>
+                      setField("attendanceFormat", e.target.value)
                     }
                     required
                   />
