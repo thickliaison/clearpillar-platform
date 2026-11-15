@@ -108,3 +108,57 @@
   font-size: 1.1rem;
   margin-bottom: 2rem;
 }
+
+.workshopsLoading {
+  color: #6c6880;
+  font-style: italic;
+}
+
+.workshopList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.workshopCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid #d9d6e3;
+  border-radius: 10px;
+  font-weight: normal;
+  margin: 0;
+  cursor: pointer;
+}
+
+.workshopCard input {
+  margin-top: 0.3rem;
+  flex-shrink: 0;
+}
+
+.workshopCardSelected {
+  border-color: #5e3eb6;
+  background-color: #f4f0ff;
+}
+
+.workshopBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.workshopTitle {
+  font-weight: 600;
+}
+
+.workshopMeta {
+  font-size: 0.9rem;
+  color: #5e3eb6;
+}
+
+.workshopDescription {
+  font-size: 0.95rem;
+  color: #3d3852;
+}

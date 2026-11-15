@@ -3,6 +3,18 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 const nodemailer = require('nodemailer');
+const {
+  fetchWorkshopsByIds,
+  describeWorkshop,
+} = require('../utils/bootcampWorkshops');
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -159,6 +171,7 @@ router.post('/bootcamp-register', async (req, res) => {
     parentPhone,
     preferredLanguage,
     attendanceFormat,
+    workshopIds,
     topics,
     hearAbout,
     hearAboutOther,
@@ -166,6 +179,50 @@ router.post('/bootcamp-register', async (req, res) => {
     communicationConsent,
     registrationConfirmation,
   } = req.body;
+
+  // Look the chosen workshops up in the sheet instead of trusting titles or
+  // times from the browser. Older clients don't send workshopIds at all.
+  const requestedIds = Array.isArray(workshopIds)
+    ? [...new Set(workshopIds.filter((id) => typeof id === 'string'))]
+    : [];
+  let workshops = [];
+  let workshopLookupFailed = false;
+  if (requestedIds.length > 0) {
+    try {
+      const open = (await fetchWorkshopsByIds(requestedIds)).filter(
+        (w) => w.isOpen,
+      );
+      // If two sheet rows share an id, keep the first.
+      workshops = open.filter(
+        (w, i) => open.findIndex((other) => other.id === w.id) === i,
+      );
+    } catch (error) {
+      // Don't lose a registration because Google Sheets is unreachable;
+      // the office email still gets the raw ids.
+      console.error('Failed to look up bootcamp workshops:', error);
+      workshopLookupFailed = true;
+    }
+    const foundIds = new Set(workshops.map((w) => w.id));
+    if (
+      !workshopLookupFailed &&
+      requestedIds.some((id) => !foundIds.has(id))
+    ) {
+      return res.status(400).send({
+        error: 'One or more selected workshops are closed or no longer available.',
+      });
+    }
+  }
+
+  const workshopsOfficeText = workshopLookupFailed
+    ? `(Could not load workshop details. Selected ids: ${requestedIds.join(', ')})`
+    : workshops.map(describeWorkshop).join('\n      ') || 'None selected';
+
+  const workshopsParentHtml = workshops.length
+    ? `<p><strong>Workshops you registered for:</strong></p>
+        <ul>${workshops
+          .map((w) => `<li>${escapeHtml(describeWorkshop(w))}</li>`)
+          .join('')}</ul>`
+    : '';
 
   const gradeDisplay = gradeLevel === 'Other' ? gradeOther : gradeLevel;
   const hearAboutDisplay = hearAbout === 'Other' ? hearAboutOther : hearAbout;
@@ -191,6 +248,9 @@ router.post('/bootcamp-register', async (req, res) => {
       Preferred Language: ${preferredLanguage}
       Attendance Format: ${attendanceFormat}
 
+      Workshops:
+      ${workshopsOfficeText}
+
       Topics of Interest:
       ${topics.join(', ')}
 
@@ -212,6 +272,7 @@ router.post('/bootcamp-register', async (req, res) => {
         <h3>Hi ${parentName},</h3>
         <p>Thank you for registering ${firstName} ${lastName} for the ClearPillar Bootcamp!</p>
         <p>We have received your registration and will follow up with additional program information and a short participant questionnaire.</p>
+        ${workshopsParentHtml}
         <p><strong>To Attend In Person:</strong><br />
         90-02 Queens Blvd, Suite 2D<br />
         Elmhurst, NY 11373</p>
