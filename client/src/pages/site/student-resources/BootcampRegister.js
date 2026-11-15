@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Snackbar, Alert } from "@mui/material";
 import validator from "validator";
 import axios from "axios";
 import styles from "styles/BootcampRegister.module.css";
+import { fetchWorkshops, formatWorkshopTime } from "utils/bootcampSheetData";
 
 // Raised from 3 to 5 per attendee feedback asking to see/select more topics.
 const MAX_TOPICS = 5;
@@ -69,6 +70,7 @@ const initialFormData = {
   parentPhone: "",
   preferredLanguage: "",
   attendanceFormat: "",
+  workshopIds: [],
   topics: [],
   hearAbout: "",
   hearAboutOther: "",
@@ -85,6 +87,18 @@ export default function BootcampRegister() {
   const [errors, setErrors] = useState({});
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [open, setOpen] = useState(false);
+  // null while loading; [] when the Workshops tab is empty or unreachable, in
+  // which case the section is hidden and not required.
+  const [workshops, setWorkshops] = useState(null);
+
+  useEffect(() => {
+    fetchWorkshops()
+      .then(setWorkshops)
+      .catch((error) => {
+        console.error("Failed to load workshops from sheet:", error);
+        setWorkshops([]);
+      });
+  }, []);
 
   const setField = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -127,8 +141,21 @@ export default function BootcampRegister() {
     });
   };
 
+  const handleWorkshopChange = (id) => {
+    setFormData((prev) => ({
+      ...prev,
+      workshopIds: prev.workshopIds.includes(id)
+        ? prev.workshopIds.filter((item) => item !== id)
+        : [...prev.workshopIds, id],
+    }));
+  };
+
   const validateForm = () => {
     const nextErrors = {};
+
+    if (workshops?.length > 0 && formData.workshopIds.length === 0) {
+      nextErrors.workshops = t("error-workshops-min");
+    }
 
     if (!validator.isEmail(formData.studentEmail)) {
       nextErrors.studentEmail = t("error-student-email");
@@ -183,6 +210,23 @@ export default function BootcampRegister() {
     } catch (error) {
       setOpen(false);
       setButtonDisabled(false);
+      if (error.response?.status === 400 && formData.workshopIds.length > 0) {
+        // A selected workshop was closed or removed after the page loaded.
+        // Reload the list and drop selections that are no longer offered.
+        try {
+          const latest = await fetchWorkshops();
+          const stillOpen = new Set(latest.map((w) => w.id));
+          setWorkshops(latest);
+          setFormData((prev) => ({
+            ...prev,
+            workshopIds: prev.workshopIds.filter((id) => stillOpen.has(id)),
+          }));
+        } catch (refreshError) {
+          console.error("Failed to reload workshops:", refreshError);
+        }
+        setErrors({ workshops: t("error-workshops-unavailable") });
+        return;
+      }
       setErrors({ submit: t("error-submit") });
     }
   };
@@ -449,6 +493,59 @@ export default function BootcampRegister() {
               ))}
             </div>
           </div>
+
+          {workshops === null && (
+            <p className={styles.workshopsLoading}>{t("workshops-loading")}</p>
+          )}
+
+          {workshops?.length > 0 && (
+            <div className="form-group mb-3">
+              <label>
+                {t("workshops")}
+                {requiredMark}
+              </label>
+              <div className={styles.workshopList}>
+                {workshops.map((workshop) => {
+                  const checked = formData.workshopIds.includes(workshop.id);
+                  const time = formatWorkshopTime(workshop);
+                  return (
+                    <label
+                      key={workshop.id}
+                      className={`${styles.workshopCard} ${
+                        checked ? styles.workshopCardSelected : ""
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => handleWorkshopChange(workshop.id)}
+                      />
+                      <span className={styles.workshopBody}>
+                        <span className={styles.workshopTitle}>
+                          {workshop.title}
+                        </span>
+                        <span className={styles.workshopMeta}>
+                          {[workshop.date, time, workshop.format]
+                            .filter(Boolean)
+                            .join(" · ")}
+                        </span>
+                        {workshop.shortDescription && (
+                          <span className={styles.workshopDescription}>
+                            {workshop.shortDescription}
+                          </span>
+                        )}
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+              {errors.workshops && (
+                <div className="alert alert-danger mt-2">
+                  {errors.workshops}
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="form-group mb-3">
             <label>

@@ -10,6 +10,7 @@ const BOOTCAMP_SHEET_ID = "1paAjK8K1fKiHubyDEBVWaj27pMAVjfGqsHsmQ_KtM_M";
 const SESSIONS_GID = "472647504";
 const SPEAKERS_GID = "1025340818";
 const PAGE_SETTINGS_GID = "1881480750";
+const WORKSHOPS_GID = "2026111501";
 
 function sheetCsvUrl(gid) {
   return `https://docs.google.com/spreadsheets/d/${BOOTCAMP_SHEET_ID}/export?format=csv&gid=${gid}`;
@@ -18,6 +19,7 @@ function sheetCsvUrl(gid) {
 const SESSIONS_CSV_URL = sheetCsvUrl(SESSIONS_GID);
 const SPEAKERS_CSV_URL = sheetCsvUrl(SPEAKERS_GID);
 const PAGE_SETTINGS_CSV_URL = sheetCsvUrl(PAGE_SETTINGS_GID);
+const WORKSHOPS_CSV_URL = sheetCsvUrl(WORKSHOPS_GID);
 
 // List-style cells (fullDescription, studentsWillLearn, bio) use one entry
 // per line within the cell (Alt+Enter in Sheets to add a line).
@@ -105,4 +107,72 @@ export async function fetchBootcampPageSettings() {
     title: row.title || "",
     subtitle: row.subtitle || "",
   };
+}
+
+// "December 5, 2026" -> local-midnight Date, or null if unparseable.
+function parseSheetDate(value) {
+  const parsed = new Date((value || "").trim());
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function startOfToday() {
+  const now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
+function slugify(value) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+// Normalizes one Workshops-tab row. server/utils/bootcampWorkshops.js reads
+// the same tab, so keep the two in sync when columns change.
+function normalizeWorkshopRow(row) {
+  const title = (row.title || "").trim();
+  const date = (row.date || "").trim();
+  return {
+    // Rachel may leave id blank; fall back to something stable enough to
+    // identify the row within one page load.
+    id: (row.id || "").trim() || slugify(`${date}-${title}`),
+    title,
+    date,
+    dateValue: parseSheetDate(date),
+    startTime: (row.startTime || "").trim(),
+    endTime: (row.endTime || "").trim(),
+    shortDescription: (row.shortDescription || "").trim(),
+    // Blank status counts as open so a new row shows up without extra steps.
+    isOpen: (row.status || "").trim().toLowerCase() !== "closed",
+    format: (row.format || "").trim(),
+    location: (row.location || "").trim(),
+    meetingLink: (row.meetingLink || "").trim(),
+  };
+}
+
+// Fetches the open-ended workshop list from the Workshops tab (one row per
+// workshop). Returns only workshops that have a title, are not Closed, and
+// are not in the past, sorted by date. Rows with an unparseable date are
+// kept (at the end) rather than silently hidden.
+export async function fetchWorkshops() {
+  const rows = await fetchCsv(WORKSHOPS_CSV_URL);
+  const today = startOfToday();
+
+  return rows
+    .map(normalizeWorkshopRow)
+    .filter((w) => w.title && w.isOpen)
+    .filter((w) => !w.dateValue || w.dateValue >= today)
+    .sort((a, b) => {
+      if (!a.dateValue) return 1;
+      if (!b.dateValue) return -1;
+      return a.dateValue - b.dateValue;
+    });
+}
+
+// Sheet times are Eastern (per Rachel), so label them explicitly for
+// families outside NY. "3:00 PM" + "4:30 PM" -> "3:00 PM – 4:30 PM ET".
+export function formatWorkshopTime(workshop) {
+  const { startTime, endTime } = workshop;
+  if (!startTime) return "";
+  return endTime ? `${startTime} – ${endTime} ET` : `${startTime} ET`;
 }
